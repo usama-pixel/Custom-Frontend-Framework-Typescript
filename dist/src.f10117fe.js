@@ -2256,6 +2256,9 @@ var Attributes = /** @class */function () {
       return _this.data[key];
     };
   }
+  Attributes.prototype.getAll = function () {
+    return this.data;
+  };
   Attributes.prototype.set = function (update) {
     Object.assign(this.data, update);
   };
@@ -2314,6 +2317,14 @@ var User = /** @class */function () {
       _this.set(response.data);
     });
   };
+  User.prototype.save = function () {
+    var _this = this;
+    this.sync.save(this.attributes.getAll()).then(function (res) {
+      _this.events.trigger('save');
+    }).catch(function () {
+      _this.trigger('error');
+    });
+  };
   return User;
 }();
 exports.User = User;
@@ -2325,13 +2336,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 var User_1 = require("./models/User");
 var user = new User_1.User({
-  id: 1
+  id: 1,
+  name: 'nn',
+  age: 7
 });
 // console.log(user.get('name'));
-user.on('change', function () {
+user.on('save', function () {
   console.log(user);
 });
-user.fetch();
+// user.fetch()
+user.save();
 // user.set({name: 'new Naam'})
 // user.trigger('change');
 },{"./models/User":"src/models/User.ts"}],"C:/Users/Usama Ali/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -2359,7 +2373,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65303" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56406" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
