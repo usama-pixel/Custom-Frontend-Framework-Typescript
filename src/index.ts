@@ -1,15 +1,7 @@
-import { User } from './models/User';
+import { UserForm } from "./views/UserForm";
 
-const user = new User({id: 1, name: 'nn', age: 7});
+const userForm = new UserForm(
+  document.getElementById('root')!
+)
 
-// console.log(user.get('name'));
-user.on('save', () => {
-  console.log(user);
-});
-
-// user.fetch()
-user.save()
-
-// user.set({name: 'new Naam'})
-
-// user.trigger('change');
+userForm.render()
